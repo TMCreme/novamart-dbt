@@ -1,0 +1,43 @@
+name: novamart
+version: "1.0.0"
+config-version: 2
+profile: novamart
+
+vars:
+  novamart:
+    payment_methods: ["credit_card", "paypal", "gift_card", "bank_transfer"]
+    lookback_window_hours: 72
+
+models:
+  novamart:
+    staging:
+      +materialized: view
+      +tags: ["staging", "daily"]
+    intermediate:
+      +materialized: ephemeral
+      +tags: ["intermediate", "daily"]
+    marts:
+      core:
+        +materialized: table
+        +tags: ["core", "daily"]
+      finance:
+        +materialized: table
+        +tags: ["finance", "daily"]
+      marketing:
+        +materialized: table
+        +tags: ["marketing", "daily"]
+
+snapshots:
+  novamart:
+    +tags: ["snapshot"]
+
+seeds:
+  novamart:
+    +tags: ["seed"]
+
+on-run-end:
+  - "{{ log_run_metadata() }}"
+
+dispatch:
+  - macro_namespace: novamart
+    search_order: ['novamart', 'dbt_utils', 'dbt']

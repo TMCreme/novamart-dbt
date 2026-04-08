@@ -1,0 +1,23 @@
+selectors:
+  - name: daily_build
+    description: "Standard daily build — staging through marts"
+    definition:
+      union:
+        - method: tag
+          value: daily
+        - method: tag
+          value: snapshot
+
+  - name: ci_slim
+    description: "CI build — only modified models and their dependents"
+    definition:
+      method: state
+      value: modified
+      greedy: true
+
+  - name: finance_only
+    description: "Finance team models"
+    definition:
+      method: tag
+      value: finance
+      children: true

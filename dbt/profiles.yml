@@ -1,0 +1,65 @@
+novamart:
+  target: dev
+  outputs:
+    # DuckDB — zero-infrastructure local dev (default)
+    dev:
+      type: duckdb
+      path: "novamart.duckdb"
+      threads: 1
+      schema: main
+
+    # PostgreSQL — local Docker instance
+    pg_dev:
+      type: postgres
+      host: localhost
+      port: 5432
+      user: novamart_loader
+      password: "{{ env_var('NOVAMART_PG_PASSWORD') }}"
+      dbname: novamart
+      schema: dev
+      threads: 4
+
+    pg_staging:
+      type: postgres
+      host: localhost
+      port: 5432
+      user: novamart_loader
+      password: "{{ env_var('NOVAMART_PG_PASSWORD') }}"
+      dbname: novamart
+      schema: staging
+      threads: 4
+
+    pg_prod:
+      type: postgres
+      host: localhost
+      port: 5432
+      user: novamart_loader
+      password: "{{ env_var('NOVAMART_PG_PASSWORD') }}"
+      dbname: novamart
+      schema: prod
+      threads: 4
+
+    # Snowflake — cloud warehouse
+    snowflake_dev:
+      type: snowflake
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
+      user: "{{ env_var('SNOWFLAKE_USER') }}"
+      password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"
+      role: NOVAMART_TRANSFORMER
+      warehouse: NOVAMART_WH
+      database: NOVAMART
+      schema: "DEV_{{ env_var('USER', 'default') }}"
+      threads: 8
+      query_tag: "dbt_novamart_dev"
+
+    snowflake_prod:
+      type: snowflake
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
+      user: "{{ env_var('SNOWFLAKE_USER') }}"
+      password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"
+      role: NOVAMART_TRANSFORMER
+      warehouse: NOVAMART_WH
+      database: NOVAMART
+      schema: PROD
+      threads: 8
+      query_tag: "dbt_novamart_prod"

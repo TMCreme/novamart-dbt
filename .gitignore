@@ -1,0 +1,33 @@
+# dbt
+dbt/target/
+dbt/dbt_packages/
+dbt/logs/
+dbt/novamart.duckdb
+dbt/novamart.duckdb.wal
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Environment
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Airflow
+orchestration/airflow/logs/
+orchestration/airflow/plugins/
+orchestration/airflow/*.db
+
+# Postgres data
+infra/pgdata/
