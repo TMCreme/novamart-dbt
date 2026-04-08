@@ -1,0 +1,3 @@
+refund_id,charge_id,amount_cents,reason,status,created_at,_etl_loaded_at
+8005,6021,500,requested_by_customer,succeeded,2024-06-10 10:00:00,2024-06-16 06:00:00
+8006,6001,2999,late_delivery,succeeded,2024-06-12 14:00:00,2024-06-16 06:00:00

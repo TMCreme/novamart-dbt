@@ -1,0 +1,5 @@
+refund_id,charge_id,amount_cents,reason,status,created_at,_etl_loaded_at
+8001,6009,5998,requested_by_customer,succeeded,2024-03-18 10:00:00,2024-06-01 06:00:00
+8002,6016,7999,product_defective,succeeded,2024-04-30 14:00:00,2024-06-01 06:00:00
+8003,6008,2499,wrong_item,succeeded,2024-03-20 09:00:00,2024-06-01 06:00:00
+8004,6003,3499,partial_refund,succeeded,2024-02-15 11:00:00,2024-06-01 06:00:00

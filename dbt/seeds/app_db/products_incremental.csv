@@ -1,0 +1,5 @@
+product_id,name,category,price_cents,created_at,updated_at,is_deleted,_etl_loaded_at
+110,Ergonomic Chair,lifestyle,34999,2023-10-01 12:00:00,2024-06-12 09:00:00,false,2024-06-16 06:00:00
+103,Mechanical Keyboard,electronics,7999,2023-03-12 14:00:00,2024-06-14 11:30:00,false,2024-06-16 06:00:00
+116,Desk Pad XL,accessories,1999,2024-06-01 08:00:00,2024-06-01 08:00:00,false,2024-06-16 06:00:00
+117,Ring Light,lifestyle,3999,2024-06-08 10:00:00,2024-06-08 10:00:00,false,2024-06-16 06:00:00

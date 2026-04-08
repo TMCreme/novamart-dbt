@@ -1,0 +1,16 @@
+address_id,user_id,street,city,state,zip,country,is_default,_etl_loaded_at
+2001,1,123 Maple St,New York,NY,10001,US,true,2024-06-01 06:00:00
+2002,1,456 Oak Ave,Brooklyn,NY,11201,US,false,2024-06-01 06:00:00
+2003,2,789 Pine Rd,Los Angeles,CA,90001,US,true,2024-06-01 06:00:00
+2004,3,321 Elm Dr,Chicago,IL,60601,US,true,2024-06-01 06:00:00
+2005,4,654 Cedar Ln,Houston,TX,77001,US,true,2024-06-01 06:00:00
+2006,5,987 Birch Blvd,Phoenix,AZ,85001,US,true,2024-06-01 06:00:00
+2007,6,147 Walnut Way,Philadelphia,PA,19101,US,true,2024-06-01 06:00:00
+2008,7,258 Spruce Ct,San Antonio,TX,78201,US,true,2024-06-01 06:00:00
+2009,8,369 Ash Pl,San Diego,CA,92101,US,true,2024-06-01 06:00:00
+2010,10,741 Poplar St,Dallas,TX,75201,US,true,2024-06-01 06:00:00
+2011,11,852 Willow Dr,San Jose,CA,95101,US,true,2024-06-01 06:00:00
+2012,12,963 Hickory Rd,Austin,TX,73301,US,true,2024-06-01 06:00:00
+2013,13,159 Magnolia Ave,Jacksonville,FL,32099,US,true,2024-06-01 06:00:00
+2014,14,267 Cypress Ln,Columbus,OH,43004,US,true,2024-06-01 06:00:00
+2015,15,378 Dogwood Ct,Charlotte,NC,28201,US,true,2024-06-01 06:00:00

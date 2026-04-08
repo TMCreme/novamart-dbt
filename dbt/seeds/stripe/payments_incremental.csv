@@ -1,0 +1,6 @@
+payment_id,order_id,amount_cents,currency,status,payment_method,created_at,_etl_loaded_at
+5013,3013,4498,usd,succeeded,credit_card,2024-04-10 11:01:00,2024-06-16 06:00:00
+5021,3021,5998,usd,succeeded,credit_card,2024-06-01 10:01:00,2024-06-16 06:00:00
+5022,3022,3999,eur,pending,paypal,2024-06-05 14:31:00,2024-06-16 06:00:00
+5023,3023,8999,usd,succeeded,bank_transfer,2024-06-08 09:01:00,2024-06-16 06:00:00
+5024,3024,2999,usd,succeeded,credit_card,2027-12-25 00:01:00,2024-06-16 06:00:00

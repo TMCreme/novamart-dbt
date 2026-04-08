@@ -1,0 +1,4 @@
+address_id,user_id,street,city,state,zip,country,is_default,_etl_loaded_at
+2016,16,489 Juniper St,Denver,CO,80201,US,true,2024-06-16 06:00:00
+2017,17,590 Sycamore Ave,Seattle,WA,98101,US,true,2024-06-16 06:00:00
+2018,3,111 Redwood Blvd,Chicago,IL,60602,US,true,2024-06-16 06:00:00

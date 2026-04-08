@@ -1,0 +1,7 @@
+session_id,user_id,session_start,session_end,device_type,channel,landing_page,_etl_loaded_at
+S025,,2024-05-15 11:30:00,2024-05-15 12:30:00,desktop,referral,/products/102,2024-06-16 06:00:00
+S026,16,2024-06-01 09:30:00,2024-06-01 10:15:00,desktop,organic_search,/products,2024-06-16 06:00:00
+S027,17,2024-06-05 14:00:00,2024-06-05 14:45:00,mobile,paid_search,/sale,2024-06-16 06:00:00
+S028,1,2024-06-08 08:30:00,2024-06-08 09:15:00,desktop,direct,/products/103,2024-06-16 06:00:00
+S029,,2024-06-10 16:00:00,2024-06-10 16:03:00,mobile,social,/,2024-06-16 06:00:00
+S030,2,2024-06-12 10:00:00,2024-06-12 10:40:00,desktop,email,/products/101,2024-06-16 06:00:00

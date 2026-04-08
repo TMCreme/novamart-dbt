@@ -1,0 +1,16 @@
+user_id,email,name,tier,created_at,updated_at,is_deleted,_etl_loaded_at
+1,alice@example.com,Alice Johnson,gold,2023-01-15 10:00:00,2024-02-10 08:30:00,false,2024-06-01 06:00:00
+2,bob@example.com,Bob Smith,silver,2023-03-22 14:30:00,2024-01-05 12:00:00,false,2024-06-01 06:00:00
+3,carol@example.com,Carol Davis,bronze,2023-05-10 09:15:00,2023-12-20 16:45:00,false,2024-06-01 06:00:00
+4,dave@example.com,Dave Wilson,gold,2023-02-28 11:00:00,2024-03-15 09:00:00,false,2024-06-01 06:00:00
+5,,Eve Martinez,silver,2023-06-05 08:00:00,2023-11-30 14:20:00,false,2024-06-01 06:00:00
+6,frank@example.com,Frank Brown,bronze,2023-04-18 13:45:00,2024-01-10 10:00:00,false,2024-06-01 06:00:00
+7,grace@example.com,Grace Lee,gold,2023-07-01 16:00:00,2024-04-01 07:30:00,false,2024-06-01 06:00:00
+8,hank@example.com,Hank Taylor,silver,2023-08-12 10:30:00,2024-02-28 11:15:00,false,2024-06-01 06:00:00
+9,iris@example.com,Iris Anderson,bronze,2023-09-20 07:00:00,2023-10-15 09:45:00,true,2024-06-01 06:00:00
+10,jack@example.com,Jack Thomas,silver,2023-10-05 15:00:00,2024-03-20 13:00:00,false,2024-06-01 06:00:00
+11,karen@example.com,Karen White,gold,2023-01-30 12:00:00,2024-04-10 08:00:00,false,2024-06-01 06:00:00
+12,leo@example.com,Leo Harris,bronze,2023-11-15 09:00:00,2024-01-25 16:30:00,false,2024-06-01 06:00:00
+13,mia@example.com,Mia Clark,silver,2023-12-01 14:00:00,2024-02-15 10:45:00,false,2024-06-01 06:00:00
+14,noah@example.com,Noah Lewis,bronze,2024-01-10 08:30:00,2024-03-05 12:00:00,false,2024-06-01 06:00:00
+15,olivia@example.com,Olivia Walker,gold,2024-02-14 11:00:00,2024-04-20 09:15:00,false,2024-06-01 06:00:00

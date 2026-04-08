@@ -1,0 +1,5 @@
+refund_id,order_id,reason,refund_amount_cents,refunded_at,_etl_loaded_at
+7001,3009,customer_request,5998,2024-03-18 10:00:00,2024-06-01 06:00:00
+7002,3016,defective_product,7999,2024-04-30 14:00:00,2024-06-01 06:00:00
+7003,3008,wrong_item,2499,2024-03-20 09:00:00,2024-06-01 06:00:00
+7004,3003,partial_refund,3499,2024-02-15 11:00:00,2024-06-01 06:00:00

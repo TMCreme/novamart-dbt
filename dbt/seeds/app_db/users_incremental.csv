@@ -1,0 +1,6 @@
+user_id,email,name,tier,created_at,updated_at,is_deleted,_etl_loaded_at
+3,carol@example.com,Carol Davis,silver,2023-05-10 09:15:00,2024-06-15 10:00:00,false,2024-06-16 06:00:00
+9,iris@example.com,Iris Anderson,bronze,2023-09-20 07:00:00,2024-06-10 14:00:00,true,2024-06-16 06:00:00
+16,paul@example.com,Paul King,bronze,2024-06-01 09:00:00,2024-06-01 09:00:00,false,2024-06-16 06:00:00
+17,quinn@example.com,Quinn Scott,silver,2024-06-05 11:30:00,2024-06-05 11:30:00,false,2024-06-16 06:00:00
+3,carol_dup@example.com,Carol Davis Dup,silver,2023-05-10 09:15:00,2024-06-15 10:00:00,false,2024-06-16 06:00:00

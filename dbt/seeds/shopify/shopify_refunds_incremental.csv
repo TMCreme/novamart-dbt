@@ -1,0 +1,3 @@
+refund_id,order_id,reason,refund_amount_cents,refunded_at,_etl_loaded_at
+7005,3021,customer_request,-500,2024-06-10 10:00:00,2024-06-16 06:00:00
+7006,3001,late_delivery,2999,2024-06-12 14:00:00,2024-06-16 06:00:00
