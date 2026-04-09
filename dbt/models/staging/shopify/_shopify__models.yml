@@ -1,0 +1,100 @@
+version: 2
+
+models:
+  - name: stg_shopify__orders
+    description: "Cleaned orders — fields renamed and typed"
+    columns:
+      - name: order_id
+        description: "Primary key"
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        description: "Foreign key to app_db.users"
+        tests:
+          - not_null
+      - name: order_date
+        description: "Order placement timestamp"
+        tests:
+          - not_null
+      - name: status
+        description: "Order status"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["completed", "pending", "cancelled", "returned"]
+      - name: total_amount_cents
+        description: "Order total in cents"
+        tests:
+          - not_null
+          - not_negative
+      - name: total_amount_dollars
+        description: "Order total in dollars"
+        tests:
+          - not_null
+      - name: order_updated_at
+        description: "Last update timestamp"
+        tests:
+          - not_null
+
+  - name: stg_shopify__order_items
+    description: "Cleaned order line items"
+    columns:
+      - name: order_item_id
+        description: "Primary key"
+        tests:
+          - unique
+          - not_null
+      - name: order_id
+        description: "Foreign key to orders"
+        tests:
+          - not_null
+      - name: product_id
+        description: "Foreign key to products"
+        tests:
+          - not_null
+      - name: quantity
+        description: "Quantity ordered"
+        tests:
+          - not_null
+          - not_negative
+      - name: unit_price_cents
+        description: "Unit price in cents"
+        tests:
+          - not_null
+          - not_negative
+      - name: unit_price_dollars
+        description: "Unit price in dollars"
+        tests:
+          - not_null
+
+  - name: stg_shopify__refunds
+    description: "Cleaned order refunds"
+    columns:
+      - name: refund_id
+        description: "Primary key"
+        tests:
+          - unique
+          - not_null
+      - name: order_id
+        description: "Foreign key to orders"
+        tests:
+          - not_null
+      - name: reason
+        description: "Refund reason"
+        tests:
+          - not_null
+      - name: refund_amount_cents
+        description: "Refund amount in cents"
+        tests:
+          - not_null
+          - not_negative
+      - name: refund_amount_dollars
+        description: "Refund amount in dollars"
+        tests:
+          - not_null
+      - name: refunded_at
+        description: "Refund timestamp"
+        tests:
+          - not_null

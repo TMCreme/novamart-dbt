@@ -1,0 +1,108 @@
+version: 2
+
+models:
+  - name: stg_app_db__users
+    description: "Cleaned user accounts — soft deletes filtered, fields renamed and typed"
+    columns:
+      - name: user_id
+        description: "Primary key"
+        tests:
+          - unique
+          - not_null
+      - name: email
+        description: "User email address — nullable (data quality issue in source)"
+      - name: full_name
+        description: "User full name"
+        tests:
+          - not_null
+      - name: tier
+        description: "Membership tier"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["gold", "silver", "bronze"]
+      - name: created_at
+        description: "Account creation timestamp"
+        tests:
+          - not_null
+      - name: updated_at
+        description: "Last update timestamp"
+        tests:
+          - not_null
+
+  - name: stg_app_db__products
+    description: "Cleaned product catalog — soft deletes filtered, price converted to dollars"
+    columns:
+      - name: product_id
+        description: "Primary key"
+        tests:
+          - unique
+          - not_null
+      - name: product_name
+        description: "Product name"
+        tests:
+          - not_null
+      - name: category
+        description: "Product category"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["electronics", "accessories", "lifestyle"]
+      - name: price_cents
+        description: "Price in cents (raw)"
+        tests:
+          - not_null
+          - not_negative
+      - name: price_dollars
+        description: "Price in dollars (converted)"
+        tests:
+          - not_null
+      - name: created_at
+        description: "Product creation timestamp"
+        tests:
+          - not_null
+
+  - name: stg_app_db__inventory
+    description: "Current inventory levels per product per warehouse"
+    columns:
+      - name: inventory_id
+        description: "Primary key"
+        tests:
+          - unique
+          - not_null
+      - name: product_id
+        description: "Foreign key to products"
+        tests:
+          - not_null
+      - name: warehouse_location
+        description: "Warehouse identifier"
+        tests:
+          - not_null
+      - name: quantity
+        description: "Current stock level"
+        tests:
+          - not_null
+          - not_negative
+
+  - name: stg_app_db__addresses
+    description: "User addresses — cleaned and typed"
+    columns:
+      - name: address_id
+        description: "Primary key"
+        tests:
+          - unique
+          - not_null
+      - name: user_id
+        description: "Foreign key to users"
+        tests:
+          - not_null
+      - name: country
+        description: "Country code"
+        tests:
+          - not_null
+      - name: is_default
+        description: "Whether this is the user's default address"
+        tests:
+          - not_null

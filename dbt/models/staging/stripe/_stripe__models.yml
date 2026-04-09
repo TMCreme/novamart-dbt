@@ -1,0 +1,140 @@
+version: 2
+
+models:
+  - name: stg_stripe__payments
+    description: "Cleaned payment transactions"
+    columns:
+      - name: payment_id
+        description: "Primary key"
+        tests:
+          - unique
+          - not_null
+      - name: order_id
+        description: "Foreign key to shopify.orders"
+        tests:
+          - not_null
+      - name: amount_cents
+        description: "Payment amount in cents"
+        tests:
+          - not_null
+          - not_negative
+      - name: amount_dollars
+        description: "Payment amount in dollars"
+        tests:
+          - not_null
+      - name: currency
+        description: "Currency code"
+        tests:
+          - not_null
+          - valid_currency_code
+      - name: status
+        description: "Payment status"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["succeeded", "pending", "failed", "refunded"]
+      - name: payment_method
+        description: "Payment method used"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["credit_card", "paypal", "gift_card", "bank_transfer"]
+
+  - name: stg_stripe__charges
+    description: "Cleaned charge records"
+    columns:
+      - name: charge_id
+        description: "Primary key"
+        tests:
+          - unique
+          - not_null
+      - name: payment_id
+        description: "Foreign key to payments"
+        tests:
+          - not_null
+      - name: amount_cents
+        description: "Charge amount in cents"
+        tests:
+          - not_null
+          - not_negative
+      - name: amount_dollars
+        description: "Charge amount in dollars"
+        tests:
+          - not_null
+      - name: currency
+        description: "Currency code"
+        tests:
+          - not_null
+          - valid_currency_code
+      - name: status
+        description: "Charge status"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["succeeded", "pending", "failed", "refunded"]
+
+  - name: stg_stripe__refunds
+    description: "Cleaned Stripe-side refund records"
+    columns:
+      - name: refund_id
+        description: "Primary key"
+        tests:
+          - unique
+          - not_null
+      - name: charge_id
+        description: "Foreign key to charges"
+        tests:
+          - not_null
+      - name: amount_cents
+        description: "Refund amount in cents"
+        tests:
+          - not_null
+          - not_negative
+      - name: amount_dollars
+        description: "Refund amount in dollars"
+        tests:
+          - not_null
+      - name: reason
+        description: "Refund reason"
+        tests:
+          - not_null
+      - name: status
+        description: "Refund status"
+        tests:
+          - not_null
+
+  - name: stg_stripe__disputes
+    description: "Cleaned payment disputes"
+    columns:
+      - name: dispute_id
+        description: "Primary key"
+        tests:
+          - unique
+          - not_null
+      - name: charge_id
+        description: "Foreign key to charges"
+        tests:
+          - not_null
+      - name: amount_cents
+        description: "Dispute amount in cents"
+        tests:
+          - not_null
+          - not_negative
+      - name: amount_dollars
+        description: "Dispute amount in dollars"
+        tests:
+          - not_null
+      - name: reason
+        description: "Dispute reason"
+        tests:
+          - not_null
+      - name: status
+        description: "Dispute status"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["under_review", "won", "lost"]

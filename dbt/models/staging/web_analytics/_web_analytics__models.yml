@@ -1,0 +1,87 @@
+version: 2
+
+models:
+  - name: stg_web_analytics__sessions
+    description: "Cleaned web sessions — anonymous sessions retain null user_id"
+    columns:
+      - name: session_id
+        description: "Primary key"
+        tests:
+          - unique
+          - not_null
+      - name: user_id
+        description: "Foreign key to app_db.users — null for anonymous sessions"
+      - name: session_start
+        description: "Session start timestamp"
+        tests:
+          - not_null
+      - name: session_end
+        description: "Session end timestamp"
+        tests:
+          - not_null
+      - name: device_type
+        description: "Device type"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["desktop", "mobile", "tablet"]
+      - name: channel
+        description: "Traffic channel"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["organic_search", "paid_search", "direct", "email", "social", "referral"]
+
+  - name: stg_web_analytics__events
+    description: "Cleaned clickstream events"
+    config:
+      materialized: ephemeral
+    columns:
+      - name: event_id
+        description: "Primary key"
+        tests:
+          - unique
+          - not_null
+      - name: session_id
+        description: "Foreign key to sessions"
+        tests:
+          - not_null
+      - name: event_type
+        description: "Event type"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["page_view", "product_click", "add_to_cart", "checkout", "purchase"]
+      - name: event_timestamp
+        description: "Event timestamp"
+        tests:
+          - not_null
+
+  - name: stg_web_analytics__page_views
+    description: "Cleaned page view records with duration"
+    columns:
+      - name: page_view_id
+        description: "Primary key"
+        tests:
+          - unique
+          - not_null
+      - name: session_id
+        description: "Foreign key to sessions"
+        tests:
+          - not_null
+      - name: page_url
+        description: "Page URL"
+        tests:
+          - not_null
+      - name: view_timestamp
+        description: "View timestamp"
+        tests:
+          - not_null
+      - name: duration_seconds
+        description: "Time spent on page in seconds"
+        tests:
+          - not_null
+          - not_negative

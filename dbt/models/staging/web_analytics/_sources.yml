@@ -1,0 +1,41 @@
+version: 2
+
+sources:
+  - name: web_analytics
+    description: "Google Analytics style event tracking — sessions, events, page views"
+    schema: main
+    freshness:
+      warn_after:
+        count: 3
+        period: hour
+      error_after:
+        count: 6
+        period: hour
+    loaded_at_field: _etl_loaded_at
+    tables:
+      - name: sessions
+        identifier: sessions_initial
+        description: "Web sessions with device and channel attribution"
+        columns:
+          - name: session_id
+            description: "Primary key"
+          - name: user_id
+            description: "Foreign key to app_db.users — nullable for anonymous sessions"
+
+      - name: events
+        identifier: events_initial
+        description: "Clickstream events within sessions"
+        columns:
+          - name: event_id
+            description: "Primary key"
+          - name: session_id
+            description: "Foreign key to sessions"
+
+      - name: page_views
+        identifier: page_views_initial
+        description: "Page view records with duration"
+        columns:
+          - name: page_view_id
+            description: "Primary key"
+          - name: session_id
+            description: "Foreign key to sessions"
