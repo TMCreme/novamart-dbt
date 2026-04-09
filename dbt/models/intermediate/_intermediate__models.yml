@@ -1,0 +1,49 @@
+version: 2
+
+models:
+  - name: int_orders_with_payments
+    description: "Orders joined with payment details and order item summaries"
+    columns:
+      - name: order_id
+        description: "Primary key — one row per order"
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        tests:
+          - not_null
+      - name: order_status
+        tests:
+          - not_null
+      - name: payment_amount_cents
+        tests:
+          - not_negative
+
+  - name: int_sessions_mapped_to_users
+    description: "Web sessions joined with user details — anonymous sessions have null user fields"
+    columns:
+      - name: session_id
+        description: "Primary key"
+        tests:
+          - unique
+          - not_null
+      - name: session_duration_seconds
+        description: "Session duration in seconds"
+        tests:
+          - not_negative
+
+  - name: int_product_inventory_current
+    description: "Latest inventory state per product per warehouse location"
+    columns:
+      - name: inventory_id
+        description: "Primary key"
+        tests:
+          - unique
+          - not_null
+      - name: product_id
+        tests:
+          - not_null
+      - name: quantity
+        tests:
+          - not_null
+          - not_negative
