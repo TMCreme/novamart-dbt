@@ -3,6 +3,9 @@ version: 2
 models:
   - name: dim_customers
     description: "Customer dimension with address and lifetime order metrics"
+    meta:
+      owner: "analytics-team"
+      contains_pii: true
     columns:
       - name: customer_key
         description: "Surrogate key (MD5 hash of user_id)"
@@ -15,6 +18,8 @@ models:
           - unique
           - not_null
       - name: full_name
+        meta:
+          pii: true
         tests:
           - not_null
       - name: tier
@@ -82,6 +87,9 @@ models:
 
   - name: fct_orders
     description: "Order fact table — incremental with 72h lookback window"
+    meta:
+      owner: "analytics-team"
+      critical: true
     columns:
       - name: order_id
         description: "Primary key — one row per order"

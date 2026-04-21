@@ -3,6 +3,9 @@ version: 2
 models:
   - name: stg_app_db__users
     description: "Cleaned user accounts — soft deletes filtered, fields renamed and typed"
+    meta:
+      owner: "data-platform-team"
+      contains_pii: true
     columns:
       - name: user_id
         description: "Primary key"
@@ -11,8 +14,14 @@ models:
           - not_null
       - name: email
         description: "User email address — nullable (data quality issue in source)"
+        meta:
+          pii: true
+          pii_type: "email"
       - name: full_name
         description: "User full name"
+        meta:
+          pii: true
+          pii_type: "name"
         tests:
           - not_null
       - name: tier
@@ -88,6 +97,9 @@ models:
 
   - name: stg_app_db__addresses
     description: "User addresses — cleaned and typed"
+    meta:
+      owner: "data-platform-team"
+      contains_pii: true
     columns:
       - name: address_id
         description: "Primary key"

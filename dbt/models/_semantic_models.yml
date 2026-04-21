@@ -1,0 +1,124 @@
+version: 2
+
+models:
+  - name: metricflow_time_spine
+    description: "Time spine model required by MetricFlow for time-based metric calculations"
+    time_spine:
+      standard_granularity_column: date_day
+    columns:
+      - name: date_day
+        granularity: day
+
+semantic_models:
+  - name: orders
+    description: "Order fact semantic model for revenue and order count metrics"
+    defaults:
+      agg_time_dimension: order_date
+    model: ref('fct_orders')
+    entities:
+      - name: order
+        type: primary
+        expr: order_id
+      - name: customer
+        type: foreign
+        expr: customer_id
+    dimensions:
+      - name: order_date
+        type: time
+        type_params:
+          time_granularity: day
+      - name: order_status
+        type: categorical
+      - name: payment_method
+        type: categorical
+      - name: payment_status
+        type: categorical
+    measures:
+      - name: total_revenue
+        description: "Sum of order total in dollars"
+        agg: sum
+        expr: order_total_dollars
+      - name: order_count
+        description: "Count of distinct orders"
+        agg: count
+        expr: order_id
+      - name: unique_customer_count
+        description: "Count of distinct customers"
+        agg: count_distinct
+        expr: customer_id
+
+  - name: sessions
+    description: "Session semantic model for marketing channel analytics"
+    defaults:
+      agg_time_dimension: session_start
+    model: ref('fct_sessions')
+    entities:
+      - name: session
+        type: primary
+        expr: session_id
+      - name: user
+        type: foreign
+        expr: user_id
+    dimensions:
+      - name: session_start
+        type: time
+        type_params:
+          time_granularity: day
+      - name: channel
+        type: categorical
+      - name: device_type
+        type: categorical
+      - name: is_anonymous
+        type: categorical
+    measures:
+      - name: session_count
+        agg: count
+        expr: session_id
+      - name: converted_session_count
+        agg: sum
+        expr: "case when converted then 1 else 0 end"
+
+metrics:
+  - name: revenue
+    description: "Total order revenue in dollars"
+    type: simple
+    label: "Revenue"
+    type_params:
+      measure: total_revenue
+
+  - name: orders
+    description: "Number of completed orders"
+    type: simple
+    label: "Orders"
+    type_params:
+      measure: order_count
+
+  - name: average_order_value
+    description: "Average revenue per order"
+    label: "AOV"
+    type: ratio
+    type_params:
+      numerator: revenue
+      denominator: orders
+
+  - name: sessions
+    description: "Total web sessions"
+    type: simple
+    label: "Sessions"
+    type_params:
+      measure: session_count
+
+  - name: converted_sessions
+    description: "Number of sessions that resulted in a purchase"
+    type: simple
+    label: "Converted Sessions"
+    type_params:
+      measure: converted_session_count
+
+  - name: conversion_rate
+    description: "Percentage of sessions that converted to a purchase"
+    label: "Conversion Rate"
+    type: ratio
+    type_params:
+      numerator: converted_sessions
+      denominator: sessions

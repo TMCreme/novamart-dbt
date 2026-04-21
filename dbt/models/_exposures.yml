@@ -1,0 +1,57 @@
+version: 2
+
+exposures:
+  - name: executive_revenue_dashboard
+    type: dashboard
+    maturity: high
+    description: >
+      Daily revenue, refund rate, and customer acquisition metrics for
+      leadership review. Primary source of truth for executive KPI tracking.
+    url: https://bi.novamart.fake/dashboards/executive-revenue
+    depends_on:
+      - ref('rpt_daily_revenue')
+      - ref('dim_customers')
+      - ref('fct_orders')
+    owner:
+      name: "Analytics Team"
+      email: analytics@novamart.fake
+
+  - name: marketing_channel_report
+    type: analysis
+    maturity: medium
+    description: >
+      Weekly channel performance and attribution report. Used by Marketing Ops
+      to inform paid media spend allocation.
+    url: https://bi.novamart.fake/reports/channel-performance
+    depends_on:
+      - ref('rpt_channel_performance')
+      - ref('fct_attribution')
+      - ref('fct_sessions')
+    owner:
+      name: "Marketing Ops"
+      email: mktg@novamart.fake
+
+  - name: finance_refund_audit
+    type: application
+    maturity: medium
+    description: >
+      Refund reconciliation between Shopify and Stripe. Flags mismatches for
+      finance ops to investigate.
+    depends_on:
+      - ref('fct_refunds')
+      - ref('fct_payments')
+    owner:
+      name: "Finance Ops"
+      email: finance@novamart.fake
+
+  - name: customer_segmentation_ml
+    type: ml
+    maturity: low
+    description: >
+      Customer features used by the tier-upgrade propensity model.
+      Features: lifetime_spend_dollars, lifetime_order_count, tier, country.
+    depends_on:
+      - ref('dim_customers')
+    owner:
+      name: "Data Science"
+      email: ds@novamart.fake

@@ -28,6 +28,10 @@ models:
 
   - name: rpt_daily_revenue
     description: "Daily revenue summary — gross, refunds, and net"
+    meta:
+      owner: "finance-team"
+      critical: true
+      dashboard: "executive_revenue_dashboard"
     columns:
       - name: revenue_date
         description: "Primary key — one row per day"
@@ -48,5 +52,6 @@ models:
           - not_negative
     tests:
       - dbt_expectations.expect_table_row_count_to_be_between:
-          min_value: 1
-          max_value: 1000
+          arguments:
+            min_value: 1
+            max_value: 1000
