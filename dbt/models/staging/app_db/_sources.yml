@@ -3,7 +3,7 @@ version: 2
 sources:
   - name: app_db
     description: "NovaMart application database — user accounts, product catalog, and inventory"
-    schema: main
+    schema: "{{ target.schema }}"
     freshness:
       warn_after:
         count: 12

@@ -3,7 +3,7 @@ version: 2
 sources:
   - name: stripe
     description: "Stripe payment processing — event-sourced, immutable append"
-    schema: main
+    schema: "{{ target.schema }}"
     freshness:
       warn_after:
         count: 6
