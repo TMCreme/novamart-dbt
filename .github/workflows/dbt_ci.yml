@@ -23,7 +23,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: pip install dbt-postgres sqlfluff sqlfluff-templater-dbt
+      - run: pip install dbt-postgres dbt-duckdb sqlfluff sqlfluff-templater-dbt
       - run: sqlfluff lint models/
       - run: dbt deps
       - name: Download production manifest
