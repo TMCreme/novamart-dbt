@@ -4,33 +4,20 @@ on:
     branches: [develop, main]
 
 jobs:
-  dbt-build:
+  lint-and-compile:
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: dbt
-    services:
-      postgres:
-        image: postgres:15
-        env:
-          POSTGRES_DB: novamart
-          POSTGRES_USER: novamart_loader
-          POSTGRES_PASSWORD: ci_password
-        ports:
-          - 5432:5432
+    env:
+      DBT_PROFILES_DIR: ${{ github.workspace }}/dbt
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: pip install dbt-postgres dbt-utils sqlfluff
-      - run: sqlfluff lint models/
+      - run: pip install dbt-duckdb sqlfluff sqlfluff-templater-dbt
       - run: dbt deps
-      - name: Download production manifest
-        uses: actions/download-artifact@v4
-        with:
-          name: prod-manifest
-          path: ./prod-artifacts/
-        continue-on-error: true
-      - run: dbt seed --target ci
-      - run: dbt build --select state:modified+ --defer --state ./prod-artifacts/ --target ci
+      - run: sqlfluff lint models/
+      - run: dbt parse
+      - run: dbt compile --target dev

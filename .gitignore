@@ -31,3 +31,5 @@ orchestration/airflow/*.db
 
 # Postgres data
 infra/pgdata/
+logs
+

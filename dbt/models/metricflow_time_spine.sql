@@ -4,6 +4,5 @@
     )
 }}
 
-select
-    date_day
+select date_day
 from {{ ref('dim_dates') }}

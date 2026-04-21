@@ -57,7 +57,7 @@ Wire each environment to its own warehouse credentials (username, password).
 | Daily Production Run | Cron `0 6 * * *` | `dbt build --select tag:daily` | Production |
 | Weekly Full Refresh | Cron `0 2 * * 0` | `dbt build --full-refresh --exclude tag:daily_only` | Production |
 | Snapshot Run | Cron `30 5 * * *` | `dbt snapshot` | Production |
-| CI Slim Build | On PR opened/updated | `dbt build --select state:modified+ --defer --state prod` | CI |
+| CI Slim Build | On PR opened/updated | `dbt build --select state:modified+ --defer` (enable "Compare changes against Production" in job settings) | CI |
 | Source Freshness | Cron `0 */2 * * *` | `dbt source freshness` | Production |
 
 ## 4. Slack / notifications
