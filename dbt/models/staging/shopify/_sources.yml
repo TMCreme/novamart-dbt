@@ -3,7 +3,7 @@ version: 2
 sources:
   - name: shopify
     description: "Shopify-like order management system"
-    schema: "{{ target.schema }}"
+    schema: raw_shopify
     freshness:
       warn_after:
         count: 6

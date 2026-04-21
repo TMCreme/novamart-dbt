@@ -3,7 +3,7 @@ version: 2
 sources:
   - name: web_analytics
     description: "Google Analytics style event tracking — sessions, events, page views"
-    schema: "{{ target.schema }}"
+    schema: raw_web_analytics
     freshness:
       warn_after:
         count: 3

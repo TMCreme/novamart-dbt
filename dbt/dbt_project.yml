@@ -13,27 +13,41 @@ models:
     staging:
       +materialized: view
       +tags: ["staging", "daily"]
+      +schema: staging
     intermediate:
       +materialized: ephemeral
       +tags: ["intermediate", "daily"]
+      +schema: intermediate
     marts:
       core:
         +materialized: table
         +tags: ["core", "daily"]
+        +schema: marts_core
       finance:
         +materialized: table
         +tags: ["finance", "daily"]
+        +schema: marts_finance
       marketing:
         +materialized: table
         +tags: ["marketing", "daily"]
+        +schema: marts_marketing
 
 snapshots:
   novamart:
     +tags: ["snapshot"]
+    +target_schema: snapshots
 
 seeds:
   novamart:
     +tags: ["seed"]
+    app_db:
+      +schema: raw_app_db
+    shopify:
+      +schema: raw_shopify
+    stripe:
+      +schema: raw_stripe
+    web_analytics:
+      +schema: raw_web_analytics
 
 on-run-end:
   - "{{ log_run_metadata() }}"

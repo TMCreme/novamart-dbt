@@ -38,11 +38,17 @@ Create three environments:
 
 | Name | Type | Target Name | Schema |
 |------|------|-------------|--------|
-| Development | Development | `dev` | `dbt_<user>` |
-| CI | Deployment | `ci` | `dbt_ci_pr_<pr_number>` |
+| Development | Development | `dev` | `dev` |
+| CI | Deployment (CI) | `ci` | `dbt_cloud_pr` |
 | Production | Deployment | `prod` | `prod` |
 
-Wire each environment to its own data warehouse credential set.
+Notes on the schema field:
+
+- **Development**: Enter `dev` here as the base. Each developer sets their own personal schema (e.g., `dbt_john`) via **Profile → Credentials** for the IDE. dbt Cloud auto-suggests `dbt_<your_name>`.
+- **CI**: Enter `dbt_cloud_pr`. dbt Cloud automatically appends `_<pr_id>_<run_id>` per CI run so each PR lands in its own isolated schema (e.g., `dbt_cloud_pr_42_987654`).
+- **Production**: Static `prod` schema.
+
+Wire each environment to its own warehouse credentials (username, password).
 
 ## 3. Jobs (per the project spec)
 
