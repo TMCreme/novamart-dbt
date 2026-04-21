@@ -1,0 +1,59 @@
+version: 2
+
+models:
+  - name: fct_sessions
+    description: "Session fact table with event summary — incremental with 24h lookback"
+    columns:
+      - name: session_id
+        description: "Primary key"
+        tests:
+          - unique
+          - not_null
+      - name: session_duration_seconds
+        tests:
+          - not_negative
+      - name: channel
+        tests:
+          - not_null
+      - name: device_type
+        tests:
+          - not_null
+      - name: converted
+        tests:
+          - not_null
+
+  - name: fct_attribution
+    description: "Last-touch attribution — maps completed orders to the most recent prior session"
+    columns:
+      - name: order_id
+        description: "Primary key"
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        tests:
+          - not_null
+      - name: order_total_dollars
+        tests:
+          - not_null
+          - not_negative
+
+  - name: rpt_channel_performance
+    description: "Channel performance aggregated across sessions and attributed revenue"
+    columns:
+      - name: channel
+        description: "Primary key"
+        tests:
+          - unique
+          - not_null
+      - name: session_count
+        tests:
+          - not_null
+          - not_negative
+      - name: attributed_revenue_dollars
+        tests:
+          - not_null
+          - not_negative
+      - name: conversion_rate
+        tests:
+          - not_null

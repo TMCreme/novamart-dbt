@@ -1,0 +1,52 @@
+version: 2
+
+models:
+  - name: fct_refunds
+    description: "Unified refund fact table — combines Shopify and Stripe refund data"
+    columns:
+      - name: refund_key
+        description: "Surrogate key (refund_id + source_system)"
+        tests:
+          - unique
+          - not_null
+      - name: refund_id
+        tests:
+          - not_null
+      - name: order_id
+        tests:
+          - not_null
+      - name: source_system
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["shopify", "stripe"]
+      - name: refund_amount_dollars
+        tests:
+          - not_null
+          - not_negative
+
+  - name: rpt_daily_revenue
+    description: "Daily revenue summary — gross, refunds, and net"
+    columns:
+      - name: revenue_date
+        description: "Primary key — one row per day"
+        tests:
+          - unique
+          - not_null
+      - name: order_count
+        tests:
+          - not_null
+          - not_negative
+      - name: gross_revenue_dollars
+        tests:
+          - not_null
+          - not_negative
+      - name: total_refund_dollars
+        tests:
+          - not_null
+          - not_negative
+    tests:
+      - dbt_expectations.expect_table_row_count_to_be_between:
+          min_value: 1
+          max_value: 1000
