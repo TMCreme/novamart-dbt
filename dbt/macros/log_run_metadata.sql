@@ -4,6 +4,12 @@
 
         {% set audit_table = target.schema ~ '.dbt_run_audit' %}
 
+        {% set create_schema_sql %}
+            create schema if not exists {{ target.schema }}
+        {% endset %}
+
+        {% do run_query(create_schema_sql) %}
+
         {% set create_table_sql %}
             create table if not exists {{ audit_table }} (
                 invocation_id varchar,
