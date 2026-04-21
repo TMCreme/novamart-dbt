@@ -2,6 +2,14 @@
 dialect = ansi
 templater = dbt
 max_line_length = 120
+# Disabled rules are stylistic choices we consciously allow:
+#   ST02: CASE WHEN is clearer than COALESCE for multi-condition logic
+#   ST06: `select * from cte` is our standard CTE pass-through pattern
+#   ST09: Join condition order is a taste preference
+#   RF04: Allows `year`, `month`, `day` as identifiers (common date dim columns)
+#   CV11: Casting style mix (::type vs cast(... as type)) is not meaningful
+#   RF02: Unqualified references inside single-CTE selects are readable
+exclude_rules = ST02, ST06, ST09, RF02, RF04, CV11
 
 [sqlfluff:templater:dbt]
 project_dir = ./

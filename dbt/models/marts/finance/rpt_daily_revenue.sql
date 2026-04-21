@@ -54,7 +54,8 @@ final as (
         on d.date_day = o.revenue_date
     left join daily_refunds as r
         on d.date_day = r.revenue_date
-    where d.date_day between
+    where
+        d.date_day between
         (select min(order_date)::date from orders)
         and (select max(order_date)::date from orders)
 

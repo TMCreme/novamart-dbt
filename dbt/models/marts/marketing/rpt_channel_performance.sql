@@ -46,7 +46,7 @@ final as (
         coalesce(cr.attributed_revenue_dollars, 0) as attributed_revenue_dollars,
         case
             when cs.session_count > 0
-            then cast(cs.converted_session_count as float) / cs.session_count
+                then cast(cs.converted_session_count as float) / cs.session_count
             else 0
         end as conversion_rate
 

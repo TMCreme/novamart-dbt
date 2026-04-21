@@ -7,8 +7,9 @@ with converted_sessions as (
         channel,
         landing_page
     from {{ ref('fct_sessions') }}
-    where converted = true
-      and user_id is not null
+    where
+        converted = true
+        and user_id is not null
 
 ),
 
@@ -42,8 +43,9 @@ sessions_before_order as (
 
     from orders as o
     left join converted_sessions as s
-        on o.customer_id = s.user_id
-        and s.session_start <= o.order_date
+        on
+            o.customer_id = s.user_id
+            and s.session_start <= o.order_date
 
 ),
 
