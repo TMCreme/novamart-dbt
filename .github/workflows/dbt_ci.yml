@@ -24,8 +24,8 @@ jobs:
         with:
           python-version: "3.11"
       - run: pip install dbt-postgres dbt-duckdb sqlfluff sqlfluff-templater-dbt
-      - run: sqlfluff lint models/
       - run: dbt deps
+      - run: sqlfluff lint models/
       - name: Download production manifest
         uses: actions/download-artifact@v4
         with:
